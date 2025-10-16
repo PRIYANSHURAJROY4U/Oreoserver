@@ -551,7 +551,7 @@
 import express from "express";
 import Poem from "../models/Poem.js";
 import { protect } from "../middleware/auth.js";
-import { sendNewPoemNotification } from "../services/emailService.js";
+import { sendNewPoemNotification } from "../Services/emailService.js";
 
 const router = express.Router();
 
