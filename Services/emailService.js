@@ -247,7 +247,7 @@ const sendNewPoemNotification = async (poem) => {
       messageId: info.messageId,
     };
   } catch (error) {
-    console.error("\n❌ EMAIL SERVICE ERROR:");
+    console.error("\n❌ EMAIL SERVICEs ERROR:");
     console.error("Error Type:", error.name);
     console.error("Error Message:", error.message);
 
