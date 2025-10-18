@@ -15,7 +15,7 @@
 // const {
 //   MONGO_URI = "mongodb+srv://priyanshurajroy02659:Msdroy11@cluster0.ze2lknu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
 //   PORT = 5000,
-//   CORS_ORIGIN = "http://localhost:3000", 
+//   CORS_ORIGIN = "http://localhost:3000",
 // } = process.env;
 
 // await mongoose.connect(MONGO_URI, {
@@ -101,11 +101,7 @@ import poemRoutes from "./routes/poems.js";
 import reviewRoutes from "./routes/reviews.js";
 import subscriberRoutes from "./routes/subscribers.js";
 
-const {
-  MONGO_URI,
-  PORT = 5000,
-  NODE_ENV = "development"
-} = process.env;
+const { MONGO_URI, PORT = 5000, NODE_ENV = "development" } = process.env;
 
 // Validate required environment variables
 if (!MONGO_URI) {
@@ -124,8 +120,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.set('trust proxy', 1);
-
+app.set("trust proxy", 1);
 
 // rate limiter
 const limiter = rateLimit({
@@ -136,9 +131,9 @@ app.use(limiter);
 
 // CORS Configuration for both development and production
 const allowedOrigins = [
-  'http://localhost:3000',           // Local development
-  'http://localhost:5173',           // Vite local development (if applicable)
-  'https://oreoverse.vercel.app'     // Production frontend
+  "http://localhost:3000", // Local development
+  "http://localhost:5173", // Vite local development (if applicable)
+  "https://oreoverse.vercel.app", // Production frontend
 ];
 
 app.use(
@@ -146,17 +141,18 @@ app.use(
     origin: function (origin, callback) {
       // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
-      
+
       if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
         return callback(new Error(msg), false);
       }
       return callback(null, true);
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['set-cookie']
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    exposedHeaders: ["set-cookie"],
   })
 );
 
@@ -185,7 +181,7 @@ app.listen(PORT, () => {
   console.log(`📍 API: http://localhost:${PORT}`);
   console.log(`🌍 Environment: ${NODE_ENV}`);
   console.log(`🔗 Allowed Origins:`);
-  allowedOrigins.forEach(origin => console.log(`   - ${origin}`));
+  allowedOrigins.forEach((origin) => console.log(`   - ${origin}`));
   console.log(
     `📧 Email Service: ${
       process.env.EMAIL_USER ? "Configured ✓" : "Not Configured ✗"
