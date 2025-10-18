@@ -124,10 +124,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.set('trust proxy', 1);
+
+
 // rate limiter
 const limiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 200,
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 app.use(limiter);
 
